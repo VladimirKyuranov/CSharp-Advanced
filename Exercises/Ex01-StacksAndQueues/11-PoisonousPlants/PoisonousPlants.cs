@@ -18,7 +18,7 @@ class PoisonousPlants
         {
             List<int> deadPlants = new List<int>();
 
-            for (int index = 0; index < plants.Count - 1; index ++)
+            for (int index = 0; index < plants.Count - 1; index++)
             {
                 if (plants[index] < plants[index + 1])
                 {
