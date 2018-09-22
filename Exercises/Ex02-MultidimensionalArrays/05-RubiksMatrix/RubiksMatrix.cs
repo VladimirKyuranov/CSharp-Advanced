@@ -14,15 +14,8 @@ class RubiksMatrix
         int rows = size[0];
         int cols = size[1];
         int[,] matrix = new int[rows, cols];
-        int number = 1;
 
-        for (int row = 0; row < rows; row++)
-        {
-            for (int col = 0; col < cols; col++)
-            {
-                matrix[row, col] = number++;
-            }
-        }
+        FillMatrix(matrix);
 
         for (int currentCommand = 0; currentCommand < commandsCount; currentCommand++)
         {
@@ -37,65 +30,98 @@ class RubiksMatrix
             switch (command)
             {
                 case "up":
-                    for (int counter = 0; counter < count % rows; counter++)
-                    {
-                        int temp = matrix[0, col];
-
-                        for (int index = 0; index < rows - 1; index++)
-                        {
-                            matrix[index, col] = matrix[index + 1, col];
-                        }
-
-                        matrix[rows - 1, col] = temp;
-                    }
-
+                    MoveUp(rows, matrix, col, count);
                     break;
                 case "down":
-                    for (int counter = 0; counter < count % rows; counter++)
-                    {
-                        int temp = matrix[rows - 1, col];
-
-                        for (int index = rows - 1; index > 0; index--)
-                        {
-                            matrix[index, col] = matrix[index - 1, col];
-                        }
-
-                        matrix[0, col] = temp;
-                    }
-
+                    MoveDown(rows, matrix, col, count);
                     break;
                 case "left":
-                    for (int counter = 0; counter < count % cols; counter++)
-                    {
-                        int temp = matrix[row, 0];
-
-                        for (int index = 0; index < cols - 1; index++)
-                        {
-                            matrix[row, index] = matrix[row, index + 1];
-                        }
-
-                        matrix[row, cols - 1] = temp;
-                    }
-
-
+                    MoveLeft(cols, matrix, row, count);
                     break;
                 case "right":
-                    for (int counter = 0; counter < count % cols; counter++)
-                    {
-                        int temp = matrix[row, cols - 1];
-
-                        for (int index = cols - 1; index > 0; index--)
-                        {
-                            matrix[row, index] = matrix[row, index - 1];
-                        }
-
-                        matrix[row, 0] = temp;
-                    }
-
+                    MoveRight(cols, matrix, row, count);
                     break;
             }
         }
 
+        RearangeMatrix(rows, cols, matrix);
+    }
+
+    private static void FillMatrix(int[,] matrix)
+    {
+        int number = 1;
+
+        for (int row = 0; row < matrix.GetLength(0); row++)
+        {
+            for (int col = 0; col < matrix.GetLength(1); col++)
+            {
+                matrix[row, col] = number++;
+            }
+        }
+    }
+
+    private static void MoveUp(int rows, int[,] matrix, int col, int count)
+    {
+        for (int counter = 0; counter < count % rows; counter++)
+        {
+            int temp = matrix[0, col];
+
+            for (int index = 0; index < rows - 1; index++)
+            {
+                matrix[index, col] = matrix[index + 1, col];
+            }
+
+            matrix[rows - 1, col] = temp;
+        }
+    }
+    
+    private static void MoveDown(int rows, int[,] matrix, int col, int count)
+    {
+        for (int counter = 0; counter < count % rows; counter++)
+        {
+            int temp = matrix[rows - 1, col];
+
+            for (int index = rows - 1; index > 0; index--)
+            {
+                matrix[index, col] = matrix[index - 1, col];
+            }
+
+            matrix[0, col] = temp;
+        }
+    }
+
+    private static void MoveLeft(int cols, int[,] matrix, int row, int count)
+    {
+        for (int counter = 0; counter < count % cols; counter++)
+        {
+            int temp = matrix[row, 0];
+
+            for (int index = 0; index < cols - 1; index++)
+            {
+                matrix[row, index] = matrix[row, index + 1];
+            }
+
+            matrix[row, cols - 1] = temp;
+        }
+    }
+
+    private static void MoveRight(int cols, int[,] matrix, int row, int count)
+    {
+        for (int counter = 0; counter < count % cols; counter++)
+        {
+            int temp = matrix[row, cols - 1];
+
+            for (int index = cols - 1; index > 0; index--)
+            {
+                matrix[row, index] = matrix[row, index - 1];
+            }
+
+            matrix[row, 0] = temp;
+        }
+    }
+
+    private static void RearangeMatrix(int rows, int cols, int[,] matrix)
+    {
         int currentNumber = 1;
 
         for (int row = 0; row < rows; row++)
