@@ -7,8 +7,8 @@ class List
     static void Main(string[] args)
     {
         int endOfRange = int.Parse(Console.ReadLine());
-        var dividers = Console.ReadLine().
-            Split()
+        var dividers = Console.ReadLine()
+            .Split()
             .Select(int.Parse)
             .ToList();
 
@@ -39,6 +39,7 @@ class List
                 if (n % number != 0)
                 {
                     divisable = false;
+                    break;
                 }
 
             }

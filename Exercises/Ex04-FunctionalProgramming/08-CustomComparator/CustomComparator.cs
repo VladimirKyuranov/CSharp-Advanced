@@ -32,5 +32,4 @@ class CustomComparator
     {
         return x => x.Where(n => n % 2 != 0).OrderBy(n => n).ToList();
     }
-
 }

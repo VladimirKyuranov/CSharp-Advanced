@@ -22,7 +22,7 @@ class PredicateParty
             var temp = new List<string>();
             foreach (string guest in guests.Where(applyFilter))
             {
-                    temp.Add(guest);
+                temp.Add(guest);
             }
 
             switch (command)
