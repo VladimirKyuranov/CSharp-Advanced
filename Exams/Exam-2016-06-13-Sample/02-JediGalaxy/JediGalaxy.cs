@@ -9,9 +9,7 @@ class JediGalaxy
             .Split()
             .Select(int.Parse)
             .ToArray();
-        int rows = size[0];
-        int cols = size[1];
-        int[,] galaxy = new int[rows, cols];
+        int[,] galaxy = new int[size[0], size[1]];
         string input;
         long collectedStars = 0;
 
